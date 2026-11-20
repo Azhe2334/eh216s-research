@@ -209,6 +209,23 @@ footer .who{font-family:var(--serif); font-size:17px; color:var(--ink); font-wei
 footer a{box-shadow:none; color:var(--ink-2)}
 footer a:hover{color:var(--brand)}
 
+
+/* 图片 */
+.photos{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px; margin:26px 0}
+@media(max-width:760px){.photos{grid-template-columns:1fr}}
+.photos figure, figure.shot{margin:0; padding:12px; background:var(--paper-2); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow)}
+.photos img, figure.shot img{width:100%; display:block; border-radius:9px; background:#eee}
+.photos figcaption, figure.shot figcaption{margin-top:10px; font-size:12.5px; color:var(--muted); line-height:1.65}
+.credit{display:block; margin-top:4px; font-size:11.5px; color:#9aa3b2}
+/* 视频 */
+.video-wrap{position:relative; padding-top:56.25%; border-radius:14px; overflow:hidden; background:#0b0e14; margin:22px 0 10px; border:1px solid var(--line)}
+.video-wrap iframe{position:absolute; inset:0; width:100%; height:100%; border:0}
+.video-links{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; margin:20px 0}
+.vlink{display:block; padding:14px 16px; background:var(--paper-2); border:1px solid var(--line); border-radius:12px; box-shadow:none; transition:transform .16s ease, box-shadow .16s ease}
+.vlink:hover{transform:translateY(-2px); box-shadow:var(--shadow)}
+.vlink b{display:block; font-size:14.5px; color:var(--ink); margin-bottom:3px}
+.vlink span{font-size:12.5px; color:var(--muted)}
+
 .totop{position:fixed; right:22px; bottom:22px; width:44px; height:44px; border-radius:50%; background:var(--paper-2); border:1px solid var(--line); box-shadow:var(--shadow); display:grid; place-items:center; color:var(--ink-2); font-size:15px; z-index:60}
 .totop:hover{color:var(--brand); border-color:rgba(26,79,214,.4)}
 
@@ -243,6 +260,7 @@ footer a:hover{color:var(--brand)}
       <a href="#market">市场</a>
       <a href="#compare">竞品</a>
       <a href="#roadmap">门槛</a>
+      <a href="#media">影像</a>
       <a href="#refs">文献</a>
     </nav>
   </div>
@@ -496,6 +514,22 @@ footer a:hover{color:var(--brand)}
     <div class="src">来源：亿航智能 EH216-S 产品页；构型细节以官方资料为准。</div>
   </div>
 
+
+  <div class="photos">
+    <figure>
+      <img src="assets/general.jpg" alt="EHang 216 整机（西班牙国家警察涂装）" loading="lazy">
+      <figcaption><b>图 1a</b>　EHang 216 整机外观：8 组机臂、16 副桨叶、双座舱。<span class="credit">摄影：David Perez，CC0（公有领域），via Wikimedia Commons</span></figcaption>
+    </figure>
+    <figure>
+      <img src="assets/side.jpg" alt="EHang 216 机臂与桨盘侧视" loading="lazy">
+      <figcaption><b>图 1c</b>　机臂与桨盘侧视：8 组机臂沿机身周向均布，桨盘直径决定 5.73 m 的整机宽度。<span class="credit">摄影：David Perez，CC0</span></figcaption>
+    </figure>
+    <figure>
+      <img src="assets/front.jpg" alt="EHang 216 前视" loading="lazy">
+      <figcaption><b>图 1b</b>　前视角度：座舱为碳纤维复合材料整体成型，滑橇式起落架，无传统操纵面。<span class="credit">摄影：David Perez，CC0</span></figcaption>
+    </figure>
+  </div>
+
   <h3>系统架构（据公开信息重构）</h3>
   <figure>
     <svg viewBox="0 0 920 430" role="img" aria-label="EH216-S 系统架构">
@@ -548,6 +582,12 @@ footer a:hover{color:var(--brand)}
     <figcaption><b>图 1</b>　系统架构：机载系统 + 地面调度 + 外部约束。EH216-S 的安全性由“机载冗余 + 地面监控 + 空域管理”三层共同构成，任一层的缺失都会使运行不成立。</figcaption>
   </figure>
 
+
+  <figure class="shot" style="max-width:420px">
+    <img src="assets/spec.jpg" alt="EHang 216 产品参数牌" loading="lazy">
+    <figcaption><b>图 1d</b>　展台参数牌（现场拍摄）。可与正文参数表对照，用于核对公开口径。<span class="credit">摄影：David Perez，CC0</span></figcaption>
+  </figure>
+
   <h3>与“飞行汽车”概念的区分</h3>
   <p>严格地说，EH216-S 不是“飞行汽车”（roadable aircraft），而是<strong>载人级自动驾驶多旋翼航空器</strong>。它没有道路行驶能力，也不需要——这个取舍是清醒的：放弃道路兼容性，换来结构重量、适航路径与运行场景的简化。把它和“会飞的汽车”混为一谈，会掩盖其真正的工程约束：<em>起降场地、空域许可，以及 30 km 的航程半径</em>。</p>
 </section>
@@ -555,6 +595,12 @@ footer a:hover{color:var(--brand)}
 <!-- ================= 技术 ================= -->
 <section id="tech">
   <div class="sechead"><div class="secnum">05</div><h2>关键技术解剖<span class="en">Key Technologies</span></h2></div>
+
+
+  <figure class="shot">
+    <img src="assets/rotors.jpg" alt="EHang 216 共轴双桨与碳纤维机臂特写" loading="lazy" style="max-height:520px; object-fit:cover">
+    <figcaption><b>图 1c</b>　共轴双桨与机臂细节：同一机臂上下两副桨共用轴线，碳纤维管梁承担弯矩与扭矩；电机与桨毂集成在臂端，这正是“用控制律换结构尺寸”的物理基础。<span class="credit">摄影：David Perez，CC0，via Wikimedia Commons</span></figcaption>
+  </figure>
 
   <div class="grid g2">
     <div class="card">
@@ -822,9 +868,46 @@ footer a:hover{color:var(--brand)}
   <p>但用课程的尺子量，它是一台<strong>“取证领先、航程落后、场景单一”</strong>的第一阶段产品：30 km 航程只达实用门槛的三成，商业模式停在卖飞机，运营半径限于文旅。这不是贬低，而是把它放回正确的位置——<em>它不是城市交通的解，而是低空文旅的第一个可运营样本</em>。真正决定行业天花板的，仍是课程所说的三根支柱能否同时长起来。</p>
 </section>
 
+<!-- ================= 影像资料 ================= -->
+<section id="media">
+  <div class="sechead"><div class="secnum">14</div><h2>影像资料<span class="en">Photo &amp; Video Evidence</span></h2></div>
+  <p>静态照片用于辨认构型与结构细节，动态影像用于观察起降、舱内与运营现场。以下视频为外部链接/嵌入，版权归原作者，仅作课程引用。</p>
+
+  <h3>14.1 官方演示与取证影像</h3>
+  <div class="video-links">
+    <a class="vlink" href="https://www.ehang.com/cn/video/show/514.html" target="_blank" rel="noopener"><b>亿航官网 · 演示视频</b><span>官方视频页（企业素材）</span></a>
+    <a class="vlink" href="https://www.ehang.com/video/videolist?id=6" target="_blank" rel="noopener"><b>亿航官网 · 视频频道</b><span>取证试验、载人飞行合集</span></a>
+    <a class="vlink" href="https://www.bilibili.com/video/BV1Lb421p7hH/" target="_blank" rel="noopener"><b>B 站 · 打“飞的”上班</b><span>第三方投稿，仅作引用</span></a>
+    <a class="vlink" href="https://www.youtube.com/channel/UCuehMeuZkXlUTD6iolx6nGQ" target="_blank" rel="noopener"><b>YouTube · 官方频道</b><span>需外网访问</span></a>
+  </div>
+
+  <h3>14.2 站内播放（B 站嵌入）</h3>
+  <div class="video-wrap">
+    <iframe src="//player.bilibili.com/player.html?bvid=BV1Lb421p7hH&page=1&high_quality=1&danmaku=0&autoplay=0"
+            allowfullscreen loading="lazy" scrolling="no" frameborder="0"
+            title="亿航 EH216-S 相关视频（B 站）"></iframe>
+  </div>
+  <p style="font-size:12.5px;color:var(--muted)">若视频无法播放（区域限制或原稿删除），请使用上方的官方链接。本页不镜像任何视频文件，仅嵌入外部播放器。</p>
+
+  <h3>14.3 图片来源与许可</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>文件</th><th>内容</th><th>作者</th><th>许可</th></tr></thead>
+      <tbody>
+        <tr><td class="num">general.jpg</td><td>EHang 216 整机（西班牙国家警察涂装）</td><td>David Perez</td><td>CC0（公有领域）</td></tr>
+        <tr><td class="num">side.jpg</td><td>机臂与桨盘侧视</td><td>David Perez</td><td>CC0</td></tr>
+        <tr><td class="num">rotors.jpg</td><td>共轴双桨与碳纤维机臂特写</td><td>David Perez</td><td>CC0</td></tr>
+        <tr><td class="num">front.jpg</td><td>前视（座舱与滑橇）</td><td>David Perez</td><td>CC0</td></tr>
+        <tr><td class="num">spec.jpg</td><td>产品参数牌</td><td>David Perez</td><td>CC0</td></tr>
+      </tbody>
+    </table>
+    <div class="src">全部照片来自 Wikimedia Commons，CC0 许可（可自由使用，无需署名；此处仍标注作者以示尊重）。</div>
+  </div>
+</section>
+
 <!-- ================= 文献 ================= -->
 <section id="refs">
-  <div class="sechead"><div class="secnum">14</div><h2>参考文献<span class="en">References · GB/T 7714—2015</span></h2></div>
+  <div class="sechead"><div class="secnum">15</div><h2>参考文献<span class="en">References · GB/T 7714—2015</span></h2></div>
   <ol class="refs">
     <li>亿航智能. EH216-S 无人驾驶载人航空器产品页[EB/OL]. [2026-11-20]. <a href="https://www.ehang.com/cn/ehang216s/">https://www.ehang.com/cn/ehang216s/</a>.</li>
     <li>亿航智能. EH216-S 适航取证专题页（审定历程与运行限制）[EB/OL]. [2026-11-20]. <a href="https://www.ehang.com/cn/ehang216s/airworthiness/">https://www.ehang.com/cn/ehang216s/airworthiness/</a>.</li>
