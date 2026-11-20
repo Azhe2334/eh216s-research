@@ -226,6 +226,32 @@ footer a:hover{color:var(--brand)}
 .vlink b{display:block; font-size:14.5px; color:var(--ink); margin-bottom:3px}
 .vlink span{font-size:12.5px; color:var(--muted)}
 
+
+/* ============ 右侧固定目录 ============ */
+.sidebar{display:none}
+@media(min-width:1240px){
+  .sidebar{
+    display:block; position:fixed; top:88px; right:18px; width:196px;
+    max-height:calc(100vh - 130px); overflow-y:auto; z-index:40;
+    font-size:12.5px; line-height:1.5; padding:4px 0 10px;
+    scrollbar-width:thin;
+  }
+  .sidebar::-webkit-scrollbar{width:5px}
+  .sidebar::-webkit-scrollbar-thumb{background:#d8d3c7; border-radius:3px}
+  .sidebar .st{font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:#a3abba; margin:0 0 8px 12px}
+  .sidebar a{
+    display:flex; gap:8px; align-items:baseline; padding:5px 10px 5px 12px;
+    border-radius:7px; color:var(--muted); box-shadow:none; border-left:2px solid transparent;
+    transition:background .15s ease, color .15s ease;
+  }
+  .sidebar a:hover{background:#f2efe7; color:var(--ink)}
+  .sidebar a .n{font-family:var(--mono); font-size:10.5px; color:#b7bdc9; min-width:16px}
+  .sidebar a.on{color:var(--brand); background:rgba(26,79,214,.07); border-left-color:var(--brand); font-weight:700}
+  .sidebar a.on .n{color:var(--brand)}
+  .sidebar .bar{height:2px; background:#e8e4da; border-radius:2px; margin:10px 12px 0; overflow:hidden}
+  .sidebar .bar i{display:block; height:100%; width:0; background:linear-gradient(90deg,var(--brand),var(--teal))}
+}
+
 .totop{position:fixed; right:22px; bottom:22px; width:44px; height:44px; border-radius:50%; background:var(--paper-2); border:1px solid var(--line); box-shadow:var(--shadow); display:grid; place-items:center; color:var(--ink-2); font-size:15px; z-index:60}
 .totop:hover{color:var(--brand); border-color:rgba(26,79,214,.4)}
 
@@ -341,6 +367,28 @@ footer a:hover{color:var(--brand)}
     <div class="kpi gold"><div class="n">216<em>架</em></div><div class="l">2024 年交付（+315%）</div></div>
   </div>
 </div>
+
+
+<aside class="sidebar" aria-label="章节导航">
+  <div class="st">目录 · Contents</div>
+  <a href="#summary"><span class="n">00</span>执行摘要</a>
+  <a href="#method"><span class="n">01</span>研究设计</a>
+  <a href="#framework"><span class="n">02</span>课程框架对照</a>
+  <a href="#path"><span class="n">03</span>取证路径</a>
+  <a href="#product"><span class="n">04</span>产品与架构</a>
+  <a href="#tech"><span class="n">05</span>关键技术</a>
+  <a href="#physics"><span class="n">06</span>性能边界</a>
+  <a href="#safety"><span class="n">07</span>适航与安全</a>
+  <a href="#scenarios"><span class="n">08</span>应用场景</a>
+  <a href="#market"><span class="n">09</span>市场可行性</a>
+  <a href="#compare"><span class="n">10</span>竞品比较</a>
+  <a href="#roadmap"><span class="n">11</span>Go/No-Go</a>
+  <a href="#limits"><span class="n">12</span>局限与未决</a>
+  <a href="#teaching"><span class="n">13</span>结论</a>
+  <a href="#media"><span class="n">14</span>影像资料</a>
+  <a href="#refs"><span class="n">15</span>参考文献</a>
+  <div class="bar"><i id="sidebarProgress"></i></div>
+</aside>
 
 <main class="wrap">
 
@@ -960,6 +1008,41 @@ footer a:hover{color:var(--brand)}
     es.forEach(e => { if (e.isIntersecting) { e.target.style.animationPlayState = 'running'; io.unobserve(e.target); } });
   }, { threshold: .3 });
   document.querySelectorAll('.fill').forEach(el => { el.style.animationPlayState = 'paused'; io.observe(el); });
+
+  // ===== 侧边栏：滚动高亮 + 章节进度 =====
+  (function () {
+    const links = Array.from(document.querySelectorAll('.sidebar a'));
+    if (!links.length) return;
+    const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+    const secs = Array.from(map.keys()).map(id => document.getElementById(id)).filter(Boolean);
+
+    function setActive(id) {
+      links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + id));
+      const a = map.get(id);
+      if (a && a.scrollIntoView) {
+        const r = a.getBoundingClientRect();
+        const host = a.parentElement;
+        const hr = host.getBoundingClientRect();
+        if (r.top < hr.top + 4 || r.bottom > hr.bottom - 4) {
+          a.scrollIntoView({ block: 'nearest' });
+        }
+      }
+    }
+
+    const io2 = new IntersectionObserver((entries) => {
+      const visible = entries.filter(e => e.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+      if (visible.length) setActive(visible[0].target.id);
+    }, { rootMargin: '-15% 0px -60% 0px', threshold: [0, .15, .4, .75] });
+    secs.forEach(s => io2.observe(s));
+
+    const prog = document.getElementById('sidebarProgress');
+    document.addEventListener('scroll', () => {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      if (prog) prog.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+    }, { passive: true });
+  })();
 </script>
 </body>
 </html>
