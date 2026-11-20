@@ -249,7 +249,14 @@ footer a:hover{color:var(--brand)}
   .sidebar a.on{color:var(--brand); background:rgba(26,79,214,.07); border-left-color:var(--brand); font-weight:700}
   .sidebar a.on .n{color:var(--brand)}
   .sidebar .bar{height:2px; background:#e8e4da; border-radius:2px; margin:10px 12px 0; overflow:hidden}
-  .sidebar .bar i{display:block; height:100%; width:0; background:linear-gradient(90deg,var(--brand),var(--teal))}
+  
+@media(min-width:1240px){
+  .topbar .nav{display:none}
+  .sidebar{background:linear-gradient(180deg,rgba(251,250,247,.92),rgba(251,250,247,.75));
+           backdrop-filter:blur(6px); border-radius:14px; padding:10px 6px 12px;
+           box-shadow:0 1px 2px rgba(21,26,33,.03)}
+}
+.sidebar .bar i{display:block; height:100%; width:0; background:linear-gradient(90deg,var(--brand),var(--teal))}
 }
 
 .totop{position:fixed; right:22px; bottom:22px; width:44px; height:44px; border-radius:50%; background:var(--paper-2); border:1px solid var(--line); box-shadow:var(--shadow); display:grid; place-items:center; color:var(--ink-2); font-size:15px; z-index:60}
